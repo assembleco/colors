@@ -1,0 +1,26 @@
+.colors {
+  align-items: center;
+  display: flex;
+  display: flex;
+  flex: 0 0 24em;
+  justify-content: center;
+
+  /* You can set flex-wrap and flex-direction individually */
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  /* Or do it all in one line with flex flow */
+  flex-flow: row wrap;
+
+  /* tweak the where items line up on the row */
+  /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+  align-content: flex-end;
+  justify-content: space-around;
+}
+
+.color {
+  background-color: #000;
+  height: 10em;
+  width: 10em;
+  margin-bottom: $base-spacing;
+}

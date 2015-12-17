@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.selection {
+  display: flex;
+  flex: 1;
+}
+
+.preview {
+  flex: 1;
+  background-color: #000;
+  margin: $base-spacing;
+}
