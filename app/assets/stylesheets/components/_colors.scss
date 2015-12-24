@@ -1,6 +1,9 @@
+$color-count: 16;
 $color-column-count: 2;
+$color-row-count: $color-count / $color-column-count;
 $color-size: 4em;
 $color-column-width: $color-column-count * $color-size + ($color-column-count - 1) * $base-spacing;
+$color-column-height: $color-row-count * $color-size + ($color-row-count - 1) * $base-spacing;
 
 .colors {
   flex: 0 0 $color-column-width;
@@ -8,10 +11,12 @@ $color-column-width: $color-column-count * $color-size + ($color-column-count - 
   display: flex;
   justify-content: center;
 
-  flex-flow: row wrap;
+  flex-flow: column wrap;
 
   align-content: flex-start;
   justify-content: space-between;
+  align-content: space-between;
+  height: $color-column-height;
 }
 
 .color {
@@ -20,8 +25,7 @@ $color-column-width: $color-column-count * $color-size + ($color-column-count - 
   margin-bottom: $base-spacing;
   width: $color-size;
 
-  &:nth-child(15),
-  &:nth-child(16) {
+  &:nth-child(8n) {
     margin-bottom: 0;
   }
 }
