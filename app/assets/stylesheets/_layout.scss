@@ -13,4 +13,12 @@
   flex: 1;
   background-color: #000;
   margin: $base-spacing;
+  padding: $base-spacing;
+}
+
+
+/* Default colors. Will be overwritten by colorscheme */
+
+.preview {
+  color: #e0e0e0;
 }

@@ -1,0 +1,30 @@
+<pre class="preview">
+<span class="base0E">require</span> <span class="base0B">"gem"</span>
+
+<span class="base08">string</span> = <span class="base0B">"base16"</span>
+<span class="base08">symbol</span> = <span class="base0B">:base16</span>
+<span class="base08">fixnum</span> = <span class="base09">0</span>
+<span class="base08">float</span>  = <span class="base09">0.00</span>
+<span class="base08">array</span>  = <span class="base0A">Array</span>.<span class="base0D">new</span>
+<span class="base08">array</span>  = [<span class="base0B">'chris'</span>, <span class="base09">85</span>]
+<span class="base08">hash</span>   = {<span class="base0B">"test"</span> =&gt; <span class="base0B">"test"</span>}
+<span class="base08">regexp</span> = <span class="base0C">/[abc]/</span>
+
+<span class="base03"># This is a comment</span>
+<span class="base0E">class</span> <span class="base0A">Person</span>
+
+<span class="base0D">attr_accessor</span> <span class="base0B">:name</span>
+
+<span class="base0E">def</span> <span class="base0D">initialize</span>(<span class="base08">attributes</span> = {})
+  <span class="base08">@name</span> = <span class="base08">attributes</span>[<span class="base0B">:name</span>]
+<span class="base0E">end</span>
+
+<span class="base0E">def</span> <span class="base0E">self</span>.<span class="base0D">greet</span>
+  <span class="base02-background"><span class="base0B">"hello"</span></span>
+<span class="base0E">end</span>
+<span class="base0E">end</span>
+
+<span class="base08">person1</span> = <span class="base0A">Person</span>.<span class="base0D">new</span>(<span class="base0B">:name</span> =&gt; <span class="base0B">"Chris"</span>)
+<span class="base0D">print</span> <span class="base0A">Person</span>::<span class="base0D">greet</span>, <span class="base0B">" "</span>, <span class="base08">person1</span>.<span class="base0D">name</span>, <span class="base0B">"<span class="base09">\n</span>"</span>
+<span class="base0D">puts</span> <span class="base0B">"another </span><span class="base0F">#{</span><span class="base0A">Person</span>::<span class="base0D">greet</span><span class="base0F">}</span> <span class="base0F">#{</span><span class="base08">person1</span>.<span class="base0D">name</span><span class="base0F">}</span><span class="base0B">"</span>
+</pre>
