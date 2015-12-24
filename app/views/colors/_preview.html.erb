@@ -12,16 +12,15 @@
 
 <span class="base03"># This is a comment</span>
 <span class="base0E">class</span> <span class="base0A">Person</span>
+  <span class="base0D">attr_accessor</span> <span class="base0B">:name</span>
 
-<span class="base0D">attr_accessor</span> <span class="base0B">:name</span>
+  <span class="base0E">def</span> <span class="base0D">initialize</span>(<span class="base08">attributes</span> = {})
+    <span class="base08">@name</span> = <span class="base08">attributes</span>[<span class="base0B">:name</span>]
+  <span class="base0E">end</span>
 
-<span class="base0E">def</span> <span class="base0D">initialize</span>(<span class="base08">attributes</span> = {})
-  <span class="base08">@name</span> = <span class="base08">attributes</span>[<span class="base0B">:name</span>]
-<span class="base0E">end</span>
-
-<span class="base0E">def</span> <span class="base0E">self</span>.<span class="base0D">greet</span>
-  <span class="base02-background"><span class="base0B">"hello"</span></span>
-<span class="base0E">end</span>
+  <span class="base0E">def</span> <span class="base0E">self</span>.<span class="base0D">greet</span>
+    <span class="base02-background"><span class="base0B">"hello"</span></span>
+  <span class="base0E">end</span>
 <span class="base0E">end</span>
 
 <span class="base08">person1</span> = <span class="base0A">Person</span>.<span class="base0D">new</span>(<span class="base0B">:name</span> =&gt; <span class="base0B">"Chris"</span>)

@@ -6,15 +6,24 @@
 
 .selection {
   display: flex;
-  flex: 1;
+  flex: 0;
+  margin: $base-spacing;
 }
 
 .preview {
   flex: 1;
   background-color: #000;
-  margin: $base-spacing;
+  margin: 0;
+  margin-left: $base-spacing;
   padding: $base-spacing;
 }
+
+.palette {
+  flex: 1;
+  background-color: #000;
+  margin-right: $base-spacing;
+}
+
 
 
 /* Default colors. Will be overwritten by colorscheme */
