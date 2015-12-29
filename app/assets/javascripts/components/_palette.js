@@ -4,7 +4,15 @@ var canvas  = $(".palette")[0];
 var palette = new Palette(canvas);
 palette.draw();
 
+var activeColor = null;
+
+$(".color").on("click", function(e) {
+  activeColor = e.target.attributes["data-color"].value;
+}.bind(this));
+
 palette.onSelect(function (rgbColor) {
-  $(".base08").css("color", rgbColor.toCSS());
-  $(".color.base08").css("background-color", rgbColor.toCSS());
+  if(activeColor) {
+    $("." + activeColor).css("color", rgbColor.toCSS());
+    $(".color." + activeColor).css("background-color", rgbColor.toCSS());
+  }
 });
