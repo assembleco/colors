@@ -28,4 +28,8 @@ $color-column-height: $color-row-count * $color-size + ($color-row-count - 1) * 
   &:nth-child(8n) {
     margin-bottom: 0;
   }
+
+  &.active {
+    border: 6px solid black;
+  }
 }
