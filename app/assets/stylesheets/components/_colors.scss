@@ -20,7 +20,6 @@ $color-column-height: $color-row-count * $color-size + ($color-row-count - 1) * 
 }
 
 .color {
-  background-color: #000;
   height: $color-size;
   margin-bottom: $base-spacing;
   width: $color-size;

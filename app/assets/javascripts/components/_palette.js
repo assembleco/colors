@@ -10,8 +10,8 @@ $(".color").on("click", function(e) {
   var newColor = e.target.attributes["data-color"].value;
 
   if(activeColor != newColor) {
-    $("." + activeColor).removeClass("active");
-    $("." + newColor).addClass("active");
+    $(".active").removeClass("active");
+    $(".color.bg-" + newColor).addClass("active");
 
     activeColor = newColor;
   }
@@ -19,7 +19,7 @@ $(".color").on("click", function(e) {
 
 palette.onSelect(function (rgbColor) {
   if(activeColor) {
-    $("." + activeColor).css("color", rgbColor.toCSS());
-    $(".color." + activeColor).css("background-color", rgbColor.toCSS());
+    $(".fg-" + activeColor).css("color", rgbColor.toCSS());
+    $(".bg-" + activeColor).css("background-color", rgbColor.toCSS());
   }
 });

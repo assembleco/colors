@@ -5,7 +5,7 @@
   <div class="colors">
     <% 16.times do |color| %>
       <div
-        class="color <%= "base0#{color.to_s(16).upcase}" %>"
+        class="color bg-<%= "base0#{color.to_s(16).upcase}" %>"
         data-color="<%= "base0#{color.to_s(16).upcase}" %>"
         >
       </div>
