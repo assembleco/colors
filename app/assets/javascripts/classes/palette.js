@@ -37,13 +37,21 @@ class Palette {
   }
 
   onSelect(callback) {
-    $(this.canvas).on("click", function (e) {
-      var x = Math.floor(e.offsetX / e.target.clientWidth * e.target.width);
-      var y = Math.floor(e.offsetY / e.target.clientHeight * e.target.height);
-      var data = this.canvas.getContext("2d").getImageData(x, y, 1, 1).data;
-      var rgb_color = new ColorRGB(data[0], data[1], data[2]);
-
-      callback(rgb_color)
+    $(this.canvas).on("mousedown", function(e) {
+      this.sendSelection(e, callback);
     }.bind(this));
+
+    $(this.canvas).on("mousemove", function(e){
+      if(e.buttons) { this.sendSelection(e, callback); }
+    }.bind(this));
+  }
+
+  sendSelection(e, callback) {
+    var x = Math.floor(e.offsetX / e.target.clientWidth * e.target.width);
+    var y = Math.floor(e.offsetY / e.target.clientHeight * e.target.height);
+    var data = this.canvas.getContext("2d").getImageData(x, y, 1, 1).data;
+    var rgb_color = new ColorRGB(data[0], data[1], data[2]);
+
+    callback(rgb_color)
   }
 }
