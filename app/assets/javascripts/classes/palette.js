@@ -36,7 +36,14 @@ class Palette {
     context.putImageData(imageData, 0, 0);
   }
 
-  onClick(callback) {
-    this.canvas.on("click", callback);
+  onSelect(callback) {
+    $(this.canvas).on("click", function (e) {
+      var x = Math.floor(e.offsetX / e.target.clientWidth * e.target.width);
+      var y = Math.floor(e.offsetY / e.target.clientHeight * e.target.height);
+      var data = this.canvas.getContext("2d").getImageData(x, y, 1, 1).data;
+      var rgb_color = new ColorRGB(data[0], data[1], data[2]);
+
+      callback(rgb_color)
+    }.bind(this));
   }
 }

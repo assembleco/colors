@@ -6,4 +6,8 @@ class ColorRGB {
     this.green = green;
     this.blue = blue;
   }
+
+  toCSS() {
+    return "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
+  }
 }
