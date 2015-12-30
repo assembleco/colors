@@ -15,16 +15,19 @@ class Palette {
   }
 
   draw() {
-    var context = canvas.getContext("2d");
-    var imageData = context.createImageData(canvas.width, canvas.height);
+    var context = this.canvas.getContext("2d");
+    var imageData = context.createImageData(
+      this.canvas.width,
+      this.canvas.height
+    );
     var saturation = 1;
 
-    for(var yIndex = 0; yIndex < canvas.height; yIndex += 1) {
-      for(var xIndex = 0; xIndex < canvas.width; xIndex += 1) {
-        var lightness = xIndex / canvas.width;
-        var hue = yIndex / canvas.height;
+    for(var yIndex = 0; yIndex < this.canvas.height; yIndex += 1) {
+      for(var xIndex = 0; xIndex < this.canvas.width; xIndex += 1) {
+        var lightness = xIndex / this.canvas.width;
+        var hue = yIndex / this.canvas.height;
 
-        var pixelIndex = (yIndex * canvas.width) + xIndex;
+        var pixelIndex = (yIndex * this.canvas.width) + xIndex;
 
         var hslColor = new ColorHSL(hue, saturation, lightness);
         var rgbColor = hslColor.toRGB();

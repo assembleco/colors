@@ -13,3 +13,32 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+"use strict";
+
+var base16Default = [
+  "#151515",
+  "#202020",
+  "#303030",
+  "#505050",
+  "#b0b0b0",
+  "#d0d0d0",
+  "#e0e0e0",
+  "#f5f5f5",
+  "#ac4142",
+  "#d28445",
+  "#f4bf75",
+  "#90a959",
+  "#75b5aa",
+  "#6a9fb5",
+  "#aa759f",
+  "#9f5536",
+];
+
+var palette = new Palette($(".palette")[0]);
+var swatch = new Swatch($(".colors")[0], $(".preview")[0]);
+
+palette.draw();
+swatch.loadHex(base16Default);
+
+palette.onSelect(swatch.updateActiveColor.bind(swatch));
