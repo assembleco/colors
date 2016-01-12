@@ -13,7 +13,10 @@ class ColorRGB {
 
   toHex() {
     var hex = [this.red, this.green, this.blue].map(function(value) {
-      return value.toString(16);
+      var hex = value.toString(16);
+      while(hex.length < 2) { hex = "0" + hex; }
+
+      return hex;
     }).join("");
 
     return new ColorHex(hex);
