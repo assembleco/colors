@@ -35,10 +35,16 @@ var base16Default = [
   "#9f5536",
 ];
 
+var colors = base16Default;
+
+if(window.location.hash) {
+  var colors = window.location.hash.replace("#", "").split(",");
+}
+
 var palette = new Palette($(".palette")[0]);
 var swatch = new Swatch($(".colors")[0], $(".preview")[0]);
 
 palette.draw();
-swatch.loadHex(base16Default);
+swatch.loadHex(colors);
 
 palette.onSelect(swatch.updateActiveColor.bind(swatch));

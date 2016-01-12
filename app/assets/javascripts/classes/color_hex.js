@@ -2,10 +2,10 @@
 
 class ColorHex {
   constructor(hex) {
-    this.hex = hex;
+    this.hex = hex.replace("#", "");
   }
 
   toCSS() {
-    return this.hex;
+    return "#" + this.hex;
   }
 }
