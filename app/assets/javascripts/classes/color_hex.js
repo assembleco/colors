@@ -8,4 +8,8 @@ class ColorHex {
   toCSS() {
     return "#" + this.hex;
   }
+
+  toHex() {
+    return this;
+  }
 }

@@ -2,9 +2,11 @@
 
 class Swatch {
   constructor(swatch, preview) {
+    this.colors = [];
     this.swatch = swatch;
     this.preview = preview;
     this.activeColor = null;
+    this.onChangeCallbacks = [];
 
     $(this.swatch).find(".color").on("click", function(e) {
       var newColor = e.target.attributes["data-color"].value;
@@ -30,8 +32,13 @@ class Swatch {
     if(this.activeColor) {
       this.updateColor(this.activeColor, color);
     }
+
+    this.onChangeCallbacks.forEach(function(callback) {
+      callback(this);
+    }.bind(this));
   }
 
+  // private API
   updateColor(colorCode, color) {
     var bgColorClass = ".bg-" + colorCode;
     var fgColorClass = ".fg-" + colorCode;
@@ -50,6 +57,9 @@ class Swatch {
     .andSelf()
     .filter(fgColorClass)
     .css("color", color.toCSS());
+
+    var colorIndex = parseInt(colorCode.replace("base0", ""), 16);
+    this.colors[colorIndex] = color;
   }
 
   loadColors(colors) {
@@ -57,5 +67,17 @@ class Swatch {
       var colorCode = "base0" + index.toString(16).toUpperCase();
       this.updateColor(colorCode, colors[index]);
     }
+
+    this.onChangeCallbacks.forEach(function(callback) {
+      callback(this);
+    }.bind(this));
+  }
+
+  onChange(callback) {
+    this.onChangeCallbacks.push(callback);
+  }
+
+  getColors() {
+    return this.colors;
   }
 }

@@ -45,6 +45,18 @@ var palette = new Palette($(".palette")[0]);
 var swatch = new Swatch($(".colors")[0], $(".preview")[0]);
 
 palette.draw();
-swatch.loadHex(colors);
+
+function updateURL(swatch) {
+  var hexColors = swatch.getColors().map(function(color) {
+    return color.toHex().toCSS().replace("#", "");
+  });
+
+  var urlHash = "#" + hexColors.join(",");
+
+  window.history.pushState(urlHash, "", urlHash);
+}
 
 palette.onSelect(swatch.updateActiveColor.bind(swatch));
+swatch.onChange(updateURL);
+
+swatch.loadHex(colors);

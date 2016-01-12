@@ -10,4 +10,12 @@ class ColorRGB {
   toCSS() {
     return "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
   }
+
+  toHex() {
+    var hex = [this.red, this.green, this.blue].map(function(value) {
+      return value.toString(16);
+    }).join("");
+
+    return new ColorHex(hex);
+  }
 }
