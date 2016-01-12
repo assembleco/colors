@@ -77,7 +77,11 @@ class Swatch {
     this.onChangeCallbacks.push(callback);
   }
 
-  getColors() {
-    return this.colors;
+  getHexString() {
+    var hexColors = this.colors.map(function(color) {
+      return color.toHex().toCSS().replace("#", "");
+    });
+
+    return hexColors.join(",")
   }
 }
