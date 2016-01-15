@@ -56,3 +56,9 @@ palette.onSelect(swatch.updateActiveColor.bind(swatch));
 swatch.onChange(updateURL);
 
 swatch.loadHex(colors);
+
+$(".download").on("click", function() {
+  var colors = swatch.getHexString();
+
+  window.location = "/configs?colors=" + colors;
+}.bind(this));
