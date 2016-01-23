@@ -3,23 +3,15 @@ require "zip_file_generator"
 
 class ConfigsController < ApplicationController
   def index
-    colors = yaml_for_colors(params[:colors].split(","))
+    colors = config_for_colors(params[:colors].split(","))
 
-    file = Tempfile.new('scheme')
-    file.write(colors)
-
-    output_dir = generate_configs(file.path)
-    zipped = zip_directory(output_dir)
-    send_file zipped
-
-    File.delete(zipped)
-    file.close
-    file.unlink
+    zipped_output_dir = generate_configs(colors)
+    send_data(zipped_output_dir, filename: "colors.zip")
   end
 
   private
 
-  def yaml_for_colors(colors)
+  def config_for_colors(colors)
     {
       "scheme" => "Colors",
       "author" => "Grayson Wright",
@@ -39,12 +31,11 @@ class ConfigsController < ApplicationController
       "base0D" => colors[13],
       "base0E" => colors[14],
       "base0F" => colors[15],
-    }.to_yaml
+    }
   end
 
-  def generate_configs(path)
-    `./vendor/base16-builder/base16 -s #{path}`
-    "vendor/base16-builder/output"
+  def generate_configs(colors)
+    Theme.new(colors).build
   end
 
   def zip_directory(path)

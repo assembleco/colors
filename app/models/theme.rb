@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # Base16 Builder (https://github.com/chriskempson/base16-builder)
 
 require "securerandom"
@@ -7,55 +6,24 @@ require "open-uri"
 require "erb"
 require "base64"
 
+require "zip"
+
 class Theme
-  BASE_PATH = File.dirname(__FILE__)
+  BASE_PATH = Rails.root.join("vendor/base16-builder")
 
   attr_accessor :template
 
-  def initialize
-    @scheme_dir = File.join(BASE_PATH, "schemes")
+  def initialize(scheme_data)
     @template_dir = File.join(BASE_PATH, "templates")
-    @output_dir = File.join(BASE_PATH, "output")
+    @scheme_data = scheme_data
   end
 
-  def build(scheme_file, template_dir)
-    if template_dir then
-      build_single_template(template_dir)
-    end
-    if scheme_file then
-      build_single_scheme(scheme_file)
-    else
-      build_all_schemes
-    end
-
-  end
-
-  def build_all_schemes
-    scheme_files = read_scheme_dir
-
-    scheme_files.each do |scheme_file|
-      build_single_scheme(scheme_file)
-    end
-  end
-
-  def build_single_scheme(scheme_file)
-    puts scheme_file
-    scheme_data = read_scheme_file(scheme_file)
+  def build
     populate_template_variables(scheme_data)
     create_output_files
   end
 
-  def read_scheme_file(scheme_file)
-    YAML.load open(scheme_file)
-  rescue StandardError
-    abort(read_error_message(scheme_file))
-  end
-
-  def read_scheme_dir
-    Dir.glob(File.join(@scheme_dir, '**', '*.yml'))
-  rescue StandardError
-    abort(read_error_message(scheme_dir))
-  end
+  attr_reader :scheme_data
 
   def build_single_template(template_dir)
     @template_dir = File.join(BASE_PATH, "templates", template_dir)
@@ -99,15 +67,18 @@ class Theme
   end
 
   def create_output_files
-    # Read each
-    read_template_dir.each do |template_file|
-      puts "  - " + template_file # Show which file we are parsing
+    buffer = Zip::OutputStream.write_buffer do |zf|
+      read_template_dir.each do |template_file|
+        contents = parse_template_file(template_file)
 
-      # Grab the results of the parsed ERB file
-      contents = parse_template_file(template_file)
+        filename = template_file.sub(/^#{@template_dir}/, "").sub(/\.erb$/, "")
 
-      write_output_file(template_file, contents)
+        zf.put_next_entry("colors/#{filename}")
+        zf.write(contents)
+      end
     end
+
+    buffer.string
   end
 
   def parse_template_file(template_file)
@@ -118,31 +89,6 @@ class Theme
     parsed = ERB.new(template_contents)
 
     return parsed.result(binding)
-  end
-
-  def write_output_file(template_file, contents)
-    dir_name = File.basename(File.dirname(template_file))
-    file_name = File.basename(template_file, ".erb")
-    scheme_name = slug(@scheme)
-
-    output_dir = File.join(@output_dir, dir_name)
-    make_dir(output_dir)
-
-    # If the filename starts with a dash, we use the dash to separate
-    delimiter = file_name.starts_with?("-") ? "" : "."
-
-    output_filename = File.join(output_dir,
-                                "base16-#{scheme_name}#{delimiter}#{file_name}")
-    output_file = File.open(output_filename, "w")
-    output_file.write(contents)
-    output_file.close
-  end
-
-  def make_dir(name)
-    if FileTest::directory?(name)
-      return
-    end
-    Dir::mkdir(name)
   end
 
   def slug(string)
@@ -239,38 +185,4 @@ class String
     prefix = prefix.to_s
     self[0, prefix.length] == prefix
   end
-end
-
-help_message = <<-EOF
-Base16 Builder v0.1
-https://github.com/chriskempson/base16-builder
-
-usage: base16               build all schemes and templates
-   or: base16 [-s <scheme>] [-t <template>]
-
--h, --help                  opens this help prompt
--s, --scheme                build specified scheme
--t, --template              build specified template
-EOF
-
-if ARGV[0] != nil then
-  tmp_template = false
-  tmp_scheme = false
-
-  ARGV.length.times do |i|
-    case ARGV[i]
-      when "-h", "--help"
-        puts help_message
-      when "-s", "--scheme"
-        tmp_scheme = ARGV[i+1]
-      when "-t", "--template"
-        tmp_template = ARGV[i+1]
-    end
-  end
-
-  if tmp_template or tmp_scheme then
-    Theme.new.build(tmp_scheme, tmp_template)
-  end
-else
-  Theme.new.build(false,false)
 end
