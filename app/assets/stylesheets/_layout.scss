@@ -5,6 +5,7 @@
 }
 
 .selection {
+  height: 90vh;
   display: flex;
   flex: 0;
   margin: $base-spacing;
@@ -20,4 +21,17 @@
 .palette {
   flex: 1;
   margin-right: $base-spacing;
+}
+
+.actions {
+  height: $base-spacing * 2;
+  left: 0;
+  right: 0;
+
+  .download {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
 }
