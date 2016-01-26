@@ -3,6 +3,19 @@
 class Palette {
   constructor(canvas) {
     this.canvas = canvas;
+    this.saturation = 0.5;
+
+    this.canvas.addEventListener('mousewheel', this.updateSaturation.bind(this));
+  }
+
+  updateSaturation(e) {
+    e.preventDefault();
+    this.saturation += e.deltaY / 500;
+
+    if(this.saturation < 0) this.saturation = 0;
+    if(this.saturation > 1) this.saturation = 1;
+
+    this.draw();
   }
 
   setPixel(imageData, pixelIndex, rgbColor) {
@@ -20,7 +33,6 @@ class Palette {
       this.canvas.width,
       this.canvas.height
     );
-    var saturation = 1;
 
     for(var yIndex = 0; yIndex < this.canvas.height; yIndex += 1) {
       for(var xIndex = 0; xIndex < this.canvas.width; xIndex += 1) {
@@ -29,7 +41,7 @@ class Palette {
 
         var pixelIndex = (yIndex * this.canvas.width) + xIndex;
 
-        var hslColor = new ColorHSL(hue, saturation, lightness);
+        var hslColor = new ColorHSL(hue, this.saturation, lightness);
         var rgbColor = hslColor.toRGB();
 
         this.setPixel(imageData, pixelIndex, rgbColor);
