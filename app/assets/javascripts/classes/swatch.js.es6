@@ -10,13 +10,12 @@ class Swatch {
 
     $(this.swatch).find(".color").on("click", function(e) {
       var newColor = e.target.attributes["data-color"].value;
+      this.setColorToActive(newColor);
+    }.bind(this));
 
-      if(this.activeColor != newColor) {
-        $(".active").removeClass("active");
-        $(e.target).addClass("active");
-
-        this.activeColor = newColor;
-      }
+    $(this.preview).find("span").on("click", function(e) {
+      var newColor = e.target.classList[0].replace("fg-", "");
+      this.setColorToActive(newColor);
     }.bind(this));
   }
 
@@ -39,6 +38,16 @@ class Swatch {
   }
 
   // private API
+
+  setColorToActive(colorCode) {
+    if(this.activeColor != colorCode) {
+      $(this.swatch).find(".active").removeClass("active");
+      $(this.swatch).find("[data-color='" + colorCode + "']").addClass("active");
+
+      this.activeColor = colorCode;
+    }
+  }
+
   updateColor(colorCode, color) {
     var bgColorClass = ".bg-" + colorCode;
     var fgColorClass = ".fg-" + colorCode;
