@@ -1,33 +1,24 @@
-$color-count: 16;
-$color-column-count: 2;
-$color-row-count: $color-count / $color-column-count;
-$color-size: 4em;
-$color-column-width: $color-column-count * $color-size + ($color-column-count - 1) * $base-spacing;
-$color-column-height: $color-row-count * $color-size + ($color-row-count - 1) * $base-spacing;
-
 .colors {
-  flex: 0 0 $color-column-width;
-  align-items: center;
   display: flex;
-  justify-content: center;
-
-  flex-flow: column wrap;
-
-  align-content: flex-start;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-content: space-between;
-  height: $color-column-height;
+}
+
+.color-column {
+  // Flex settings as a child element
+  flex: 0 1 40%;
+
+  // Flex settings as a parent element
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
 
 .color {
-  height: $color-size;
-  margin-bottom: $base-spacing;
-  width: $color-size;
+  flex: 0 1 10%;
+  width: 100%;
   cursor: pointer;
-
-  &:nth-child(8n) {
-    margin-bottom: 0;
-  }
 
   &.active {
     border: 6px solid black;

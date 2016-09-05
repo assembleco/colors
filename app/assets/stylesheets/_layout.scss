@@ -1,25 +1,29 @@
 .content {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: column;
+  align-items: stretch;
 }
 
 .selection {
-  height: 90vh;
   display: flex;
-  flex: 0;
+  flex: 0 1 90vh;
   margin: $base-spacing;
 }
 
 .preview {
-  flex: 1;
+  flex: 0 1 50%;
   margin: 0;
   margin-left: $base-spacing;
   padding: $base-spacing;
 }
 
+.colors {
+  flex: 0 1 20%;
+}
+
 .palette {
-  flex: 1;
+  flex: 0 1 50%;
   margin-right: $base-spacing;
 
   display: flex;
@@ -34,13 +38,14 @@
   input {
     flex-grow: 0;
     height: $base-spacing * 2;
+    margin-bottom: 0;
   }
 }
 
 .actions {
-  height: $base-spacing * 2;
   left: 0;
   right: 0;
+  flex: 0 0 $base-spacing * 2;
 
   .download {
     display: block;
