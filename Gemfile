@@ -16,7 +16,7 @@ gem "normalize-rails", "~> 3.0.0"
 gem "pg"
 gem "puma"
 gem "rack-canonical-host"
-gem "rails", "~> 4.2.0"
+gem "rails", "~> 5.0"
 gem "recipient_interceptor"
 gem "rubyzip"
 gem "sass-rails", "~> 5.0"
@@ -26,7 +26,6 @@ gem "title"
 gem "uglifier"
 
 group :development do
-  gem "quiet_assets"
   gem "refills"
   gem "spring"
   gem "spring-commands-rspec"
@@ -42,7 +41,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "i18n-tasks"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.3.0"
+  gem "rspec-rails", "~> 3.5"
 end
 
 group :test do
