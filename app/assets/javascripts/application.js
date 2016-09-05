@@ -62,3 +62,6 @@ $(".download").on("click", function() {
 
   window.location = "/configs?colors=" + colors;
 }.bind(this));
+
+var helpModal = new Modal($(".help-modal")[0]);
+$(".help-link").on("click", helpModal.open.bind(helpModal));

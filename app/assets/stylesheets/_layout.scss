@@ -39,7 +39,21 @@ h1 {
   border-radius: 0;
 }
 
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: $action-color;
+}
+
+.help-link {
+  display: none;
+}
+
 @include media($large-screen-up) {
+  .help-link {
+    display: inline;
+  }
+
   .content {
     height: 100vh;
   }
