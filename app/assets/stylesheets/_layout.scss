@@ -21,6 +21,20 @@
 .palette {
   flex: 1;
   margin-right: $base-spacing;
+
+  display: flex;
+  flex-direction: column;
+
+  canvas {
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: $base-spacing;
+  }
+
+  input {
+    flex-grow: 0;
+    height: $base-spacing * 2;
+  }
 }
 
 .actions {

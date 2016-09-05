@@ -1,11 +1,12 @@
 "use strict";
 
 class Palette {
-  constructor(canvas) {
+  constructor(canvas, color_picker) {
     this.canvas = canvas;
+    this.color_picker = color_picker;
     this.saturation = 0.5;
 
-    this.canvas.addEventListener('mousewheel', this.updateSaturation.bind(this));
+    this.canvas.addEventListener("mousewheel", this.updateSaturation.bind(this));
   }
 
   updateSaturation(e) {
@@ -58,6 +59,10 @@ class Palette {
 
     $(this.canvas).on("mousemove", function(e){
       if(e.buttons) { this.sendSelection(e, callback); }
+    }.bind(this));
+
+    this.color_picker.addEventListener("change", function(e) {
+      callback(new ColorHex(e.target.value));
     }.bind(this));
   }
 

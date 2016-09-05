@@ -41,7 +41,7 @@ if(window.location.hash) {
   var colors = window.location.hash.replace("#", "").split(",");
 }
 
-var palette = new Palette($(".palette")[0]);
+var palette = new Palette($(".palette canvas")[0], $(".color_picker")[0]);
 var swatch = new Swatch($(".colors")[0], $(".preview")[0]);
 
 palette.draw();
