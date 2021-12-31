@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.2.3"
+ruby "3.0.1"
 
 gem "airbrake"
 gem "autoprefixer-rails"
@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara-webkit"
+  # gem "capybara-webkit"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
