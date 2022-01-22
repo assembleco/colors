@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.1"
+ruby "3.1.0"
 
 gem "airbrake"
 gem "autoprefixer-rails"
@@ -33,7 +33,6 @@ end
 
 group :development, :test do
   gem "awesome_print"
-  gem "bullet"
   gem "bundler-audit", require: false
   gem "byebug"
   gem "dotenv-rails"

@@ -4,11 +4,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.bullet_logger = true
-    Bullet.rails_logger = true
-  end
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
